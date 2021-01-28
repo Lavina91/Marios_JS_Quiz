@@ -1,11 +1,5 @@
 // VARIABLE DECLARATIONS 
 
-
-
-
-
-// VARIABLE DECLARATIONS 
-
 // connects to my start button 
 var startBtn = document.querySelector('#startBtn'); // works 
 
@@ -21,58 +15,28 @@ var quizBody = document.querySelector('#body'); // works
 // connects to the high score section of the header 
 var viewHighScore = document.querySelector('#high-score'); // work
 
-// Quiz questions
-var quizQuestions = [
-    {
-    question: 'What are functions inside of an object called?',
-    choices: ['Inner Function','Function[2]','Method','None of the above'],
-    answer: 'Method'
-    },
-    
-    {
-     question: 'What are the values passed through a function called?',
-    choices: ['Params','Arguments','Variables','None of the above'],
-    answer: 'Arguments'
-    },
-    
-        {
-    question: 'What are the names of 2 different scope types?',
-    choices: ['Inner & Outer','First & Last','Local & Global','None of the above'],
-    answer: 'Local & Global'
-    },
-    
-        {
-    question: 'What are the 2 ways to create a function?',
-    choices: ['Expression & Declaration','Announcement & Statement','Truthy & Falsy','None of the above'],
-    answer: 'Expression & Declaration'
-    },
 
-//      {
-//     question: 'What does DOM stand for?',
-//     choices: ['Document Object Model','Display Object Management','Dispatched objectional Model','None of the above'],
-//     answer: 'Document Object Model'
-//     },
-    
-//         {
-//     question: 'What tag element do you use to link Javascript to HTML?',
-//     choices: ['<link>','<p>','<a>','None of the above'],
-//     answer: 'None of the above'
-//     },
-    
-//         {
-//     question: 'Objects must be stored in what type of brackets?',
-//     choices: ['Square','Curly','Hairy','None of the above'],
-//     answer: 'Curly'
-//     },
-    
-//         {
-//     question: 'One example of the Chrome Devtools developers use for debugging is called?',
-//     choices: ['Console','CPU','R2D2','None of the above'],
-//     answer: 'Console'
-//     }
-]
+var quizQuestion = ['What are functions inside of an object called?', 'What are the values passed through a function called?', 'What are the names of 2 different scope types?', 'What are the 2 ways to create a function?', ]
 
-console.log(quizQuestions)
+var quizChoices = {
+
+    choice1:  ['Inner Function','Function[2]','Method','None of the above'],
+
+    choice2:  ['Params','Arguments','Variables','None of the above'],
+
+    choice3: ['Inner & Outer','First & Last','Local & Global','None of the above'],
+    
+    choice4:  ['Expression & Declaration','Announcement & Statement','Truthy & Falsy','None of the above']
+
+
+
+}
+
+
+var quizAnswer = ['Method', 'Arguments', 'Local & Global', 'Expression & Declaration' ]
+
+
+
 
 // variable to store quiz timer
 var quizTime = 120;
@@ -99,7 +63,7 @@ function startTime(){
 
                 // create visible timer so user can see time left
             timer.textContent = 'Time: ' + quizTime;
-            if(quizTime <= 0 || questionIndex === quizQuestions.length){
+            if(quizTime <= 0 || questionIndex === quizQuestion.length){
                 clearInterval(quizInterval)
             }
          }, 1000)
@@ -118,7 +82,7 @@ function generateQuestions(){
 
 
        // and display question to user
-     quizBody.textContent = quizQuestions[questionIndex].question;
+     quizBody.textContent = quizQuestion[questionIndex];
 
 
 
@@ -133,15 +97,10 @@ function generateQuestions(){
     console.log(olEl)
     
     
-    
-    // var liEl = document.createElement('li');
-
-
-
-    
-
 //     // loop thru variable quizQuestions.question[i].length
-for(i = 0; i < quizQuestions.length ; i ++){
+for(i = 0; i < quizQuestion.length ; i ++){
+
+    questionIndex = i
 
 
  // create a new li element to attach choices on 
@@ -153,19 +112,21 @@ for(i = 0; i < quizQuestions.length ; i ++){
     var btnEl = document.createElement('button');
     liEl.append(btnEl);
 
-    btnEl.textContent = quizQuestions[i].choices[i]
+
+
+    btnEl.textContent = quizAnswer[questionIndex]
 
 
 // attach event listener to that button 
-    btnEl.addEventListener('click', function(event){
-        event.stopPropagation();
-        if( btnEl === quizQuestions[i].answer){
-            alert('your right')
+    btnEl.addEventListener('click', function(){
+        
+
+        if(btnEl === quizAnswer[questionIndex]){
+            questionIndex ++
         }
-        else{
-            alert('your wrong')
-        }
-    })
+
+
+        })
 
     
 
@@ -215,11 +176,18 @@ function checkAnswer(){
 
 function endQuiz(){
 
-    // display score 
+    // display score
+     // and prompt user for their initials  
 
-    // and prompt user for their initials 
+    var userInput = window.prompt('Your score was '+ userScore + '\nPlease enter your initials');
+
+
+ 
+
 
     // store score and initials in local storage 
+
+
 
     // store in the high score section in navbar
 };
@@ -242,4 +210,3 @@ startBtn.addEventListener('click', startTime);
 
 
 
-// FUNCTIONS
