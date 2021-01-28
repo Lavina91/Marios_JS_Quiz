@@ -1,0 +1,71 @@
+body {
+    background-image: url(./images/ignasi_pattern_s.png);
+}
+
+h1{
+    margin-right: 70px;
+}
+
+#title {
+    text-decoration: underline;
+    margin-top: 15%;
+    text-align: center;
+}
+
+nav {
+    background-color: #656E6E;
+}
+
+#timer {
+    margin-right: 100px;
+    font-weight: bolder;
+}
+
+#high-score{
+    font-weight: bolder;
+}
+
+#body {
+    border-block: none;
+    padding-top: 100px;
+    text-align: center;
+    margin-right: 39px;
+
+}
+
+p {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#startQuiz {
+    color: white;
+    margin-top: 100px;
+
+}
+
+footer {
+    background-color: #656E6E;
+}
+
+#Copyright {
+    padding-left: 40%;
+    font-weight: bolder;
+}
+
+ol {
+    margin-left: 420px;
+    margin-top: 20px;
+    list-style-type: upper-alpha;
+    text-align: left !important;
+}
+
+li{
+    padding-right: 50px;
+    text-align:left !important;
+}
+
+#startBtn {
+    margin-left: 35%;
+    margin-top: 50px;
+}
