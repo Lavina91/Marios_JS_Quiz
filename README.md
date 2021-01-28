@@ -14,4 +14,4 @@ Library: Bootstrap
 
 ## Link For Deployed Application
 
-[Live URL](https://lavina91.github.io/Marios_JS_Quiz/)
+[Link for Deployed Application](https://lavina91.github.io/Marios_JS_Quiz/)
