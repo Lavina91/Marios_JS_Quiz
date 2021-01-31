@@ -7,6 +7,7 @@ var startBtn = document.querySelector('#startBtn'); // works
 var timer = document.querySelector('#timer'); // works 
 
 var answerDiv = document.querySelector('.answerDiv');
+answerDiv.setAttribute('style', 'font-size:25px')
 
 
 // connects to title section of quiz
@@ -98,13 +99,14 @@ function generateQuestions() {
 
 
     //create a new ol element and append to bodyEl
-    var divEl = document.createElement('h1')
+    var divEl = document.createElement('div')
 
     quizBody.appendChild(divEl);
 
 
 
     var olEl = document.createElement('ol')
+    
 
     divEl.appendChild(olEl);
     console.log(olEl)
@@ -135,6 +137,7 @@ function generateQuestions() {
 
         // assign it a class of button 
         var btnEl = document.createElement('button');
+        
     
 
         // CHANGE THE SIZE OF THE BUTTONS USING SETATTRIBUTE
