@@ -60,6 +60,10 @@ var finalResults = document.querySelector('#final-results')
 
 var finalScore = document.querySelector('#final-score')
 
+var submitButton = document.querySelector('#submit-initials')
+
+var userInitials = document.querySelector('#add-initials')
+
 
 
 // button A
@@ -114,7 +118,7 @@ function startTime() {
             finalScore.textContent = 'Your final Score is ' + quizTime
 
 
-
+           setHighScore()
 
 
 
@@ -355,7 +359,20 @@ function generateQuestions() {
 
 
 
+function setHighScore() {
 
+   submitButton.addEventListener('click', function() {
+
+    var users = []
+
+    var user = userInitials.value 
+    users.push(user)
+    console.log(users)
+
+    localStorage.setItem('users', user )
+
+   })
+}
 
 
 
