@@ -14,6 +14,7 @@
 </head>
 
 <body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <nav class="navbar fixed-top navbar-light">
     <div class="container-fluid">
       <button id='high-score'> <a class="navbar-brand" href="#" id='high-score'>High Score - </a></button>
@@ -25,6 +26,8 @@
   <div class="container">
 
     <header class="container" id='title'>
+
+
       <h1>Welcome to Mario's Coding Quiz</h1>
     </header>
 
@@ -32,45 +35,43 @@
   </div>
 
   <div class="container-2" id='body'>
-    <p id='hide'>You will be ask to answer 4 code related in 2 minutes. However be careful, as every wrong answer you
+    <p id='hide'>You will be ask to answer four code related in one minute. However be careful, as every wrong answer
+      you
       choose
       will deduct 10 seconds.
       <strong>Good luck & have fun !</strong>
     </p>
-    <div class="answerDiv"></div>
-    <!-- 
-    <button class="btn btn-primary answerBtn" id="a"></button> -->
+
 
     <button type="button" id='startBtn' class="btn btn-dark btn-lg">Click Here To Begin Quiz</button>
   </div>
+  <!-- -- <div class='questionDiv'></div> -->
 
+  <div class="answerDiv" style="display: none;">
+    <ol>
 
+      <li>
+        <button type="button" id='btna' class="choice-btn  btn-lg"></button>
+      </li>
 
+      <li>
+        <button type="button" id='btnb' class="choice-btn  btn-lg"></button>
+      </li>
 
+      <li>
+        <button type="button" id='btnc' class="choice-btn  btn-lg"></button>
+      </li>
 
+      <li>
+        <button type="button" id='btnd' class="choice-btn btn-lg"></button>
+      </li>
 
+    </ol>
+  </div>
 
-
-
-
-
-
-
-
-  <!-- end of main grid -->
-
-  <!-- beginning of footer section -->
-
-
-
-  <footer class="navbar fixed-bottom navbar-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" id="Copyright" href="#">@Copyright Mario Lavina 2020</a>
-    </div>
-  </footer>
-
-  <!-- end of footer section  -->
-  <script src="./function.js"></script>
-</body>
-
-</html>
+  <div id="final-results" style="display: none;">
+    <h2>Final Results</h2>
+    <p id="final-score"></p>
+    <input type="text" id="add-initials" placeholder="Enter Your Initials"><br>
+    <input type="submit" id="submit-initials" placeholder="Submit">
+  </div>

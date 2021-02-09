@@ -1,4 +1,44 @@
 // VARIABLE DECLARATIONS 
+var quizQuestion = [
+    {
+        question: 'What are functions inside of an object called?',
+        choices: ['Inner Function', 'Fuction[2]', 'Method', 'none of the above'],
+
+        answer: ' Method'
+    },
+    {
+        question: 'What are the values passed through a function called?',
+        choices: ['Params', 'Arguments', 'Variables', 'None of the above'],
+        answer: ' Arguments'
+    },
+
+    {
+        question: 'What are the names of 2 different scope types?',
+        choices: ['Inner & Outer', 'First & Last', 'Local & Global', 'None of the above'],
+        answer: ' Local & Global'
+    },
+    {
+        question: 'What are the 2 ways to create a function?',
+        choices: ['Expression & Declaration', 'Annocement & Statement', 'Truthy & Falsy', 'None of the above'],
+        answer: ' Expression & Declaration'
+    },
+
+]
+
+// console.log(quizQuestion[0].choices[0])
+
+// variable to store quiz timer
+var quizTime = 60;
+
+// setting user score to 0
+var userScore = '';
+
+var questionIndex = 0;
+var answerIndex = 0;
+
+
+var userName = ''
+
 
 // connects to my start button 
 var startBtn = document.querySelector('#startBtn'); // works 
@@ -6,59 +46,41 @@ var startBtn = document.querySelector('#startBtn'); // works
 // connects to my timer 
 var timer = document.querySelector('#timer'); // works 
 
-var answerDiv = document.querySelector('.answerDiv');
-answerDiv.setAttribute('style', 'font-size:25px')
-
-
 // connects to title section of quiz
 var quizTitle = document.querySelector('#title'); //works 
 
 // connects to the body og the quiz
 var quizBody = document.querySelector('#body'); // works
 
+// connect to all quiz button choices 
+var allButtons = document.querySelectorAll('.choice-btn');
+
+// connecting to the div that will contain the results of the quiz
+var finalResults = document.querySelector('#final-results')
+
+var finalScore = document.querySelector('#final-score')
+
+
+
+// button A
+var btnA = document.querySelector('#btna')
+// button B
+var btnB = document.querySelector('#btnb')
+// button C
+var btnC = document.querySelector('#btnc')
+// button D
+var btnD = document.querySelector('#btnd')
+
+
+// div created to hold quiz answer choices 
+var choiceSection = document.querySelector('.answerDiv');
+
 // connects to the high score section of the header 
 var viewHighScore = document.querySelector('#high-score'); // work
 
 
-// Quiz questions
-var quizQuestion = [
-    {
-        question: 'What are functions inside of an object called?',
-        choices: ['Inner Function', 'Function[2]', 'Method', 'None of the above'],
-        answer: 'Method'
-    },
 
-    {
-        question: 'What are the values passed through a function called?',
-        choices: ['Params', 'Arguments', 'Variables', 'None of the above'],
-        answer: 'Arguments'
-    },
 
-    {
-        question: 'What are the names of 2 different scope types?',
-        choices: ['Inner & Outer', 'First & Last', 'Local & Global', 'None of the above'],
-        answer: 'Local & Global'
-    },
-
-    {
-        question: 'What are the 2 ways to create a function?',
-        choices: ['Expression & Declaration', 'Announcement & Statement', 'Truthy & Falsy', 'None of the above'],
-        answer: 'Expression & Declaration'
-    },
-
-]
-
-console.log(quizQuestion[0].choices[0])
-
-// variable to store quiz timer
-var quizTime = 120;
-
-// setting user score to 0
-var userScore = 0;
-
-var questionIndex = 0;
-
-var userName = ''
 
 
 // FUNCTIONS
@@ -75,8 +97,31 @@ function startTime() {
 
         // create visible timer so user can see time left
         timer.textContent = 'Time: ' + quizTime;
-        if (quizTime <= 0 || questionIndex === quizQuestion.length) {
+
+
+        // if the timer in the quiz reaches 0 OR runs out of questions 
+        if (quizTime <= 0 || questionIndex >= quizQuestion.length) {
             clearInterval(quizInterval)
+
+            // hide the quiz body 
+            quizBody.setAttribute('style', 'display:none')
+            choiceSection.setAttribute('style', 'display:none')
+
+            finalResults.setAttribute('style', 'display:block')
+
+
+            finalScore.setAttribute('style', 'font-weight:bolder')
+            finalScore.textContent = 'Your final Score is ' + quizTime
+
+
+
+
+
+
+
+
+
+
         }
     }, 1000)
 
@@ -87,122 +132,224 @@ function startTime() {
 
 function generateQuestions() {
 
-    // hide initial info that is on intro page 
-    quizTitle.textContent = '';
+    // hide intro page 
 
-    // hides the paragraph element of intro page 
-    var hidden = document.querySelector('#hide')
-    hidden.setAttribute('style', 'display:none')
+    // hides intro header 
+    quizTitle.setAttribute('style', 'display:none');
 
+    // hides the start button 
     startBtn.setAttribute('style', 'display:none')
 
-
-
-    //create a new ol element and append to bodyEl
-    var divEl = document.createElement('div')
-
-    quizBody.appendChild(divEl);
+    // hides the intro p element 
+    var hidden = document.querySelector('#hide');
+    hidden.setAttribute('style', 'display:none');
 
 
 
-    var olEl = document.createElement('ol')
-    
 
-    divEl.appendChild(olEl);
-    console.log(olEl)
-    // document.querySelector(".answerBtn").innerText = quizQuestion[0].choices[0]
+    quizBody.textContent = quizQuestion[questionIndex].question;
 
-    var i = 0
 
-    quizQuestion.forEach(data => {
-        console.log(JSON.stringify(data))
+    choiceSection.setAttribute('style', 'display:block')
+
+    btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+    btnA.textContent = quizQuestion[questionIndex].choices[answerIndex]
+    answerIndex++;
+
+    btnB.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+    btnB.textContent = quizQuestion[questionIndex].choices[answerIndex]
+    answerIndex++;
+
+    btnC.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+    btnC.textContent = quizQuestion[questionIndex].choices[answerIndex]
+    answerIndex++;
+
+    btnD.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+    btnD.textContent = quizQuestion[questionIndex].choices[answerIndex];
+
+
+
+
+    btnA.addEventListener('click', function () {
+
+        let answerIndex = 0
+
+        if (btnA.name === quizQuestion[questionIndex].answer) {
+            alert('Your right')
+            quizQuestion[questionIndex].choices
+            questionIndex++;
+            quizBody.textContent = quizQuestion[questionIndex].question
+
+            console.log(questionIndex)
+
+            btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnA.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnB.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnB.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnC.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnC.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnD.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnD.textContent = quizQuestion[questionIndex].choices[answerIndex];
+
+
+
+
+
+        }
+        else {
+
+            alert('Try again')
+            quizTime = quizTime - 10
+
+
+        }
     })
 
-    // quizBody.textContent = quizQuestion[questionIndex].question;
-
-    // loop thru variable quizQuestions.question[i].length
-    for (i = 0; i < quizQuestion.length; i++) {
-
-        // and display question to user
-        answerDiv.textContent = quizQuestion[questionIndex].question
-        console.log(answerDiv.textContent = quizQuestion[questionIndex].question)
 
 
+    btnB.addEventListener('click', function () {
+
+        let answerIndex = 0
+
+        if (btnB.name === quizQuestion[questionIndex].answer) {
+            alert('Your right')
+            quizQuestion[questionIndex].choices
+            questionIndex++;
+            quizBody.textContent = quizQuestion[questionIndex].question
+
+            console.log(questionIndex)
 
 
-        // create a new li element to attach choices on 
-        var liEl = document.createElement('li');
-        olEl.appendChild(liEl)
+            btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnA.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnB.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnB.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnC.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnC.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnD.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnD.textContent = quizQuestion[questionIndex].choices[answerIndex];
+
+        }
+        else {
+
+            alert('Try Again')
+            quizTime = quizTime - 10
 
 
-        // assign it a class of button 
-        var btnEl = document.createElement('button');
-        
-    
-
-        // CHANGE THE SIZE OF THE BUTTONS USING SETATTRIBUTE
-
-
-        liEl.append(btnEl);
-
-
-
-        btnEl.textContent = quizQuestion[questionIndex].choices[i]
-        console.log(quizQuestion[questionIndex].choices[i])
-
- }
-
-    function checkAnswer() {
-
-        // create if statements to check if the button clicked is === to quizQuestions.answer
-
-
-
-        // attach event listener to that button 
-        btnEl.addEventListener('click', function () {
-
-
-
-            if ( btnEl=== quizQuestion[questionIndex].answer) {
-                alert('correct')
-            }
-            else {
-                alert('incorrect')
-                console.log(quizQuestion[questionIndex].answer)
-
-            }
-
-
-        })
-
-
-
-        // if right move to next question 
-
-
-        // else wrong stay at question
-        // and take off 15 secs 
-
-    };
-
-            checkAnswer();
-};
+        }
+    })
 
 
 
 
-function endQuiz() {
-
-    // display score
-    // and prompt user for their initials  
-
-    var userInput = window.prompt('Your score was ' + userScore + '\nPlease enter your initials');
 
 
-    // store score and initials in local storage 
+    btnC.addEventListener('click', function () {
 
-    localStorage.setItem('Participant: ', userInput)
-    localStorage.setItem('Score : ', userScore)
+        let answerIndex = 0
+
+        if (btnC.name === quizQuestion[questionIndex].answer) {
+            alert('Your right')
+
+            quizQuestion[questionIndex].choices
+            questionIndex++;
+            quizBody.textContent = quizQuestion[questionIndex].question
+
+
+            console.log(quizQuestion.length)
+            console.log(questionIndex)
+
+
+            btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnA.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnB.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnB.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnC.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnC.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnD.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnD.textContent = quizQuestion[questionIndex].choices[answerIndex];
+
+
+        }
+        else {
+
+            alert('Try Again')
+            quizTime = quizTime - 10
+
+
+        }
+    })
+
+
+
+
+    btnD.addEventListener('click', function () {
+
+        let answerIndex = 0
+
+        if (btnD.name === quizQuestion[questionIndex].answer) {
+            alert('Your right')
+            quizQuestion[questionIndex].choices
+            questionIndex++;
+            quizBody.textContent = quizQuestion[questionIndex].question
+
+            console.log(questionIndex)
+
+
+            btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnA.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnB.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnB.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnC.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnC.textContent = quizQuestion[questionIndex].choices[answerIndex]
+            answerIndex++;
+
+            btnD.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
+            btnD.textContent = quizQuestion[questionIndex].choices[answerIndex];
+
+
+        }
+        else {
+
+            alert('Try Again')
+            quizTime = quizTime - 10
+
+
+        }
+    })
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -228,15 +375,4 @@ function endQuiz() {
 
 
 
-// EVENT LISTENERS
-
 startBtn.addEventListener('click', startTime);
-
-viewHighScore.addEventListener('click', function () {
-
-    localStorage.getItem(userinput);
-    localStorage.getItem(userScore)
-})
-
-
-

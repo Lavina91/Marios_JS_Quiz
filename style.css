@@ -2,9 +2,11 @@ body {
     background-image: url(./images/ignasi_pattern_s.png);
 }
 
-h1{
-    margin-right: 70px;
+h2 {
+    text-align: center;
+    margin-top: 20%;
 }
+
 
 #title {
     text-decoration: underline;
@@ -16,12 +18,22 @@ nav {
     background-color: #656E6E;
 }
 
+#add-initials {
+    margin-left: 41%;
+    text-align: center;
+}
+
+#submit-initials {
+    margin-left: 47%;
+    margin-top: 10px;
+}
+
 #timer {
     margin-right: 100px;
     font-weight: bolder;
 }
 
-#high-score{
+#high-score {
     font-weight: bolder;
 }
 
@@ -36,6 +48,7 @@ nav {
 p {
     margin-left: 20%;
     margin-right: 20%;
+    text-align: center;
 }
 
 #startQuiz {
@@ -60,9 +73,9 @@ ol {
     text-align: left !important;
 }
 
-li{
+li {
     padding-right: 50px;
-    text-align:left !important;
+    text-align: left !important;
 }
 
 #startBtn {
