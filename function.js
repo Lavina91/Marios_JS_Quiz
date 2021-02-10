@@ -31,7 +31,7 @@ var quizQuestion = [
 var quizTime = 60;
 
 // setting user score to 0
-var userScore = '';
+var highScores = []
 
 var questionIndex = 0;
 var answerIndex = 0;
@@ -51,6 +51,8 @@ var quizTitle = document.querySelector('#title'); //works
 
 // connects to the body og the quiz
 var quizBody = document.querySelector('#body'); // works
+
+var hidden = document.querySelector('#hide');
 
 // connect to all quiz button choices 
 var allButtons = document.querySelectorAll('.choice-btn');
@@ -93,6 +95,8 @@ var viewHighScore = document.querySelector('#high-score'); // work
 function startTime() {
     // once start button is clicked 
     // Timer goes down from 120 
+
+    console.log(viewHighScore)
 
     // and then I call on the function generate Question
     var quizInterval = setInterval(function () {
@@ -145,7 +149,7 @@ function generateQuestions() {
     startBtn.setAttribute('style', 'display:none')
 
     // hides the intro p element 
-    var hidden = document.querySelector('#hide');
+    
     hidden.setAttribute('style', 'display:none');
 
 
@@ -184,7 +188,7 @@ function generateQuestions() {
             questionIndex++;
             quizBody.textContent = quizQuestion[questionIndex].question
 
-            console.log(questionIndex)
+           
 
             btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
             btnA.textContent = quizQuestion[questionIndex].choices[answerIndex]
@@ -227,7 +231,7 @@ function generateQuestions() {
             questionIndex++;
             quizBody.textContent = quizQuestion[questionIndex].question
 
-            console.log(questionIndex)
+            
 
 
             btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
@@ -272,9 +276,6 @@ function generateQuestions() {
             quizBody.textContent = quizQuestion[questionIndex].question
 
 
-            console.log(quizQuestion.length)
-            console.log(questionIndex)
-
 
             btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
             btnA.textContent = quizQuestion[questionIndex].choices[answerIndex]
@@ -315,7 +316,7 @@ function generateQuestions() {
             questionIndex++;
             quizBody.textContent = quizQuestion[questionIndex].question
 
-            console.log(questionIndex)
+            
 
 
             btnA.setAttribute('name', ' ' + quizQuestion[questionIndex].choices[answerIndex])
@@ -363,33 +364,53 @@ function setHighScore() {
 
    submitButton.addEventListener('click', function() {
 
-    var users = []
+    var newHighScore = {
+        initials: userInitials.value,
+        score: quizTime
+    }
 
-    var user = userInitials.value 
-    users.push(user)
-    console.log(users)
+       highScores.push(newHighScore);
+       console.log(newHighScore.initials)
+       console.log(newHighScore.score)
+       console.log(highScores)
+       
+        localStorage.setItem("scores", JSON.stringify(highScores));
 
-    localStorage.setItem('users', user )
+       quizTitle.setAttribute('style', 'display:block');
+
+       // hides the start button 
+       startBtn.setAttribute('style', 'display:block')
+
+       // hides the intro p element 
+        hidden.setAttribute('style', 'display:block');
+
+
+        finalResults.setAttribute('style', 'display:none')
+
+        
+
+
+    
+
+    
 
    })
+
+}
+
+
+function getHighScore() {
+
+    var lastInitials = JSON.parse(localStorage.getItem("scores"));
+    if (lastInitials !== null) {
+       alert('User Initials: ' + lastInitials.initials + '\nScore: ' + lastInitials.score)
+    }
+    
+   
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+viewHighScore.addEventListener('click', getHighScore)
 
 startBtn.addEventListener('click', startTime);
